@@ -22,7 +22,7 @@ const TaskList = ({ tasks }) => {
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{task.Title}</td>
-              <td>{task.description}</td>
+              <td>{task.Description}</td>
               <td>{task.Priority}</td>
               <td className="action_btns">
                 <Button title="Edit Task" className="btn-success ">

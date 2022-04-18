@@ -3,7 +3,8 @@ import { Button, Container, Form } from "react-bootstrap";
 import { MdOutlineAddTask } from "react-icons/md";
 import { BiTaskX } from "react-icons/bi";
 import TaskList from "./TaskList";
-import { getTaskData } from "../../services/taskServices";
+import { getTaskData, storeTaskData } from "../../services/taskServices";
+import axios from "axios";
 
 const AddTask = () => {
   const [tasks, setTasks] = useState([]);
@@ -11,32 +12,7 @@ const AddTask = () => {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
   const [isCreateMode, setIsCreateMode] = useState(false);
-
-  function handleAddTask(e) {
-    e.preventDefault();
-
-    if (!title) {
-      alert("Please give a title");
-      return;
-    } else if (!description) {
-      alert("Please give a description");
-      return;
-    } else if (!priority) {
-      alert("Please set priority");
-      return;
-    }
-    const newTask = {
-      Title: title,
-      description,
-      Priority: priority,
-    };
-    const taskItem = tasks;
-    tasks.unshift(newTask);
-    setTasks(taskItem);
-    setTitle("");
-    setDescription("");
-    setPriority("");
-  }
+  // const [isAdded, setIsAdded] = useState(false);
 
   // https://todo-app37.herokuapp.com/loadTodo
 
@@ -52,8 +28,43 @@ const AddTask = () => {
 
   const initializeData = async () => {
     const data = await getTaskData();
+    // for last data sho first
+    data.sort();
+    data.reverse();
     setTasks(data);
   };
+
+  async function handleAddTask(e) {
+    e.preventDefault();
+
+    if (!title) {
+      alert("Please give a title");
+      return;
+    } else if (!description) {
+      alert("Please give a description");
+      return;
+    } else if (!priority) {
+      alert("Please set priority");
+      return;
+    }
+    const newTask = {
+      Title: title,
+      Description: description,
+      Priority: priority,
+    };
+
+    const isAdded = await storeTaskData(newTask);
+    if (isAdded) {
+      setTitle("");
+      setDescription("");
+      setPriority("");
+      await initializeData();
+    } else {
+      alert("Something went wrong");
+    }
+
+    // setIsAdded(true);
+  }
 
   return (
     <div>

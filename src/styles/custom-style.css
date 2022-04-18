@@ -1,0 +1,65 @@
+/***********************************/
+/*          Common CSS             */
+/***********************************/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+/***********************************/
+/*          Header CSS             */
+/***********************************/
+/***********************************/
+/*          Body CSS             */
+/***********************************/
+.add_task{
+    display: flex;
+   justify-content: flex-end;
+   align-items: center;
+}
+.add_task_btn{
+    background-color: rgb(98, 166, 110);
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.my_task_area{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+.add_task_form{
+    background-color: rgba(133, 169, 158, 0.621);
+    max-width: 700px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    
+}
+.task_table{
+    text-align: center;
+ 
+}
+.action_btns{
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+}
+
+/***********************************/
+/*          Footer CSS             */
+/***********************************/
+.footer{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100px;
+   /* background-color: lightgray; */
+}

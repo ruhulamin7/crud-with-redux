@@ -9,7 +9,7 @@ export const getTaskData = async () => {
 };
 
 // call api and store data to the database
-/**@param {object} newTask */
+// /**@param {object} newTask */
 
 export const storeTaskData = async (newTask) => {
   let isAdded = false;

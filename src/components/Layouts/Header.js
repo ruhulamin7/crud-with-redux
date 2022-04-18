@@ -9,6 +9,7 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Count from "../Count";
 
 const Header = () => {
   return (
@@ -32,17 +33,17 @@ const Header = () => {
               <Nav.Link as={Link} to="/task-detail">
                 Task Detail
               </Nav.Link>
+
               <NavDropdown title="Profile" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
                   Another action
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
+                <NavDropdown.Item href="#action5"></NavDropdown.Item>
               </NavDropdown>
             </Nav>
+            Cart: <Count />
             <Form className="d-flex">
               <FormControl
                 type="search"

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { MdOutlineAddTask } from "react-icons/md";
 import { BiTaskX } from "react-icons/bi";
 import TaskList from "./TaskList";
 import { getTaskData, storeTaskData } from "../../services/taskServices";
 import axios from "axios";
+import Counter from "../Counter/Counter";
 
 const AddTask = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,6 +13,7 @@ const AddTask = () => {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
   const [isCreateMode, setIsCreateMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [isAdded, setIsAdded] = useState(false);
 
   // https://todo-app37.herokuapp.com/loadTodo
@@ -31,7 +33,9 @@ const AddTask = () => {
     // for last data sho first
     data.sort();
     data.reverse();
+
     setTasks(data);
+    setIsLoading(false);
   };
 
   async function handleAddTask(e) {
@@ -69,6 +73,8 @@ const AddTask = () => {
   return (
     <div>
       <Container>
+        <Counter />
+
         <div className="add_task">
           <Button
             className="add_task_btn"
@@ -126,7 +132,7 @@ const AddTask = () => {
           </Form>
         )}
 
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} isLoading={isLoading} />
       </Container>
     </div>
   );

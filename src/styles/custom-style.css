@@ -6,8 +6,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-
+.spinner{
+    color: coral;
+    font-size: 100px;
+   display: flex;
+   justify-content: center;
+   margin: 30px;
+}
 
 
 /***********************************/

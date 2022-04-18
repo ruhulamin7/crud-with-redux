@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Counter from "./components/Counter/Counter";
 import Layout from "./components/Layouts/Layout";
 import AddTask from "./components/Tasks/AddTask";
 import About from "./pages/About/About";

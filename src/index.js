@@ -7,11 +7,47 @@ import "./styles/custom-style.css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
+const initialState = {
+  counter: 10,
+};
+
+console.log(initialState.counter);
+
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_STATE":
+      return {
+        ...state,
+      };
+    case "INCREMENT":
+      return {
+        ...state,
+        counter: state.counter + 1,
+      };
+    case "DECREMENT":
+      return {
+        ...state,
+        counter: (state.counter -= 1),
+      };
+    default:
+      return state;
+  }
+};
+
+let store = createStore(
+  counterReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

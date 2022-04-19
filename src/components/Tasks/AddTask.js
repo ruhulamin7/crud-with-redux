@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Spinner } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import { MdOutlineAddTask } from "react-icons/md";
 import { BiTaskX } from "react-icons/bi";
 import TaskList from "./TaskList";
 import { getTaskData, storeTaskData } from "../../services/taskServices";
-import axios from "axios";
 import Counter from "../Counter/Counter";
 
 const AddTask = () => {

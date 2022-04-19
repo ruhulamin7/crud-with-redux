@@ -9,6 +9,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import { parse } from "@fortawesome/fontawesome-svg-core";
 
 const initialState = {
   counter: 10,
@@ -23,15 +24,28 @@ const counterReducer = (state = initialState, action) => {
         ...state,
       };
     case "INCREMENT":
+      let actionValue =
+        typeof action.payload === "undefined" ? 1 : action.payload;
+      actionValue = parseInt(actionValue);
       return {
         ...state,
-        counter: state.counter + 1,
+        counter: state.counter + actionValue,
       };
     case "DECREMENT":
       return {
         ...state,
         counter: (state.counter -= 1),
       };
+    case "UPDATE":
+      return {
+        ...state,
+        counter: parseInt(action.payload),
+      };
+    // case "INC_SPECIFIC":
+    //   return {
+    //     ...state,
+    //     counter: state.counter + parseInt(action.payload),
+    //   };
     default:
       return state;
   }

@@ -15,6 +15,7 @@
 }
 
 
+
 /***********************************/
 /*          Header CSS             */
 /***********************************/
@@ -56,6 +57,16 @@
     display: flex;
     column-gap: 10px;
     justify-content: center;
+}
+.test_counter{
+    max-width: 500px;
+}
+.top_counter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+    margin-top: 50px;
 }
 
 /***********************************/

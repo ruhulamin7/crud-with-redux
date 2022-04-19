@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Badge,
   Button,
   Container,
   Form,
@@ -8,10 +9,12 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Count from "../Count";
 
 const Header = () => {
+  const totalTasks = useSelector((state) => state.tasks);
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -31,7 +34,7 @@ const Header = () => {
                 About
               </Nav.Link>
               <Nav.Link as={Link} to="/task-detail">
-                Task Detail
+                Tasks <Badge bg="danger">{totalTasks.length}</Badge>
               </Nav.Link>
 
               <NavDropdown title="Profile" id="navbarScrollingDropdown">

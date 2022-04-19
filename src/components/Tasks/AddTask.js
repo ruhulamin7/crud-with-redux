@@ -5,14 +5,18 @@ import { BiTaskX } from "react-icons/bi";
 import TaskList from "./TaskList";
 import { getTaskData, storeTaskData } from "../../services/taskServices";
 import Counter from "../Counter/Counter";
+import CreateTask from "./CreateTask";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddTask = () => {
-  const [tasks, setTasks] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("");
+  // const [tasks, setTasks] = useState([]);
+
   const [isCreateMode, setIsCreateMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const tasks = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
+
   // const [isAdded, setIsAdded] = useState(false);
 
   // https://todo-app37.herokuapp.com/loadTodo
@@ -29,45 +33,12 @@ const AddTask = () => {
 
   const initializeData = async () => {
     const data = await getTaskData();
-    // for last data sho first
+    // for last data show first
     data.sort();
     data.reverse();
-
-    setTasks(data);
+    dispatch({ type: "GET_TASKS", payload: data });
     setIsLoading(false);
   };
-
-  async function handleAddTask(e) {
-    e.preventDefault();
-
-    if (!title) {
-      alert("Please give a title");
-      return;
-    } else if (!description) {
-      alert("Please give a description");
-      return;
-    } else if (!priority) {
-      alert("Please set priority");
-      return;
-    }
-    const newTask = {
-      Title: title,
-      Description: description,
-      Priority: priority,
-    };
-
-    const isAdded = await storeTaskData(newTask);
-    if (isAdded) {
-      setTitle("");
-      setDescription("");
-      setPriority("");
-      await initializeData();
-    } else {
-      alert("Something went wrong");
-    }
-
-    // setIsAdded(true);
-  }
 
   return (
     <div>
@@ -84,52 +55,7 @@ const AddTask = () => {
           </Button>
         </div>
 
-        {isCreateMode && (
-          <Form onSubmit={handleAddTask} className="add_task_form">
-            <h4 className="mb-3">Add New Task</h4>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control
-                onChange={(e) => setTitle(e.target.value)}
-                name="title"
-                type="text"
-                value={title}
-                placeholder="Task Title"
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Control
-                onChange={(e) => setDescription(e.target.value)}
-                name="description"
-                placeholder="Task Description"
-                as="textarea"
-                value={description}
-                rows={3}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Control
-                onChange={(e) => setPriority(e.target.value)}
-                name="priority"
-                as="select"
-                value={priority}
-              >
-                <option value="">--Select Priority--</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </Form.Control>
-            </Form.Group>
-            <Button type="submit" variant="success">
-              Submit
-            </Button>{" "}
-          </Form>
-        )}
+        {isCreateMode && <CreateTask />}
 
         <TaskList tasks={tasks} isLoading={isLoading} />
       </Container>

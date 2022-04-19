@@ -9,10 +9,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { parse } from "@fortawesome/fontawesome-svg-core";
 
 const initialState = {
   counter: 10,
+  tasks: [],
 };
 
 console.log(initialState.counter);
@@ -37,9 +37,22 @@ const counterReducer = (state = initialState, action) => {
         counter: (state.counter -= 1),
       };
     case "UPDATE":
+      if (action.payload) {
+        return {
+          ...state,
+          counter: parseInt(action.payload),
+        };
+      }
+      break;
+
+    case "GET_TASKS":
       return {
         ...state,
-        counter: parseInt(action.payload),
+        tasks: action.payload,
+      };
+    case "ADD_TASK":
+      return {
+        ...state,
       };
     // case "INC_SPECIFIC":
     //   return {

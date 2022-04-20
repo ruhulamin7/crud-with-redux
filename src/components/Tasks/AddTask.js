@@ -14,7 +14,7 @@ const AddTask = () => {
   const [isCreateMode, setIsCreateMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const tasks = useSelector((state) => state.tasks);
+  const tasks = useSelector((state) => state.taskReducer.tasks);
   const dispatch = useDispatch();
 
   // const [isAdded, setIsAdded] = useState(false);

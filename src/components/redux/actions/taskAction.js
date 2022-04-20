@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as Types from "../types/Types";
+import * as Types from "../types/types";
 
 export const getTaskDataAction = () => (dispatch) => {
   axios.get("https://todo-app37.herokuapp.com/loadTodo").then((res) => {

@@ -5,7 +5,7 @@ import { storeTaskData } from "../../services/taskServices";
 import TestCounter from "../TestCounter/TestCounter";
 
 const Counter = () => {
-  const counter = useSelector((state) => state.counter);
+  const counter = useSelector((state) => state.counterReducer.counter);
   const dispatch = useDispatch();
 
   return (

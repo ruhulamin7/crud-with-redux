@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import Count from "../Count";
 
 const Header = () => {
-  const totalTasks = useSelector((state) => state.tasks);
+  const totalTasks = useSelector((state) => state.taskReducer.tasks);
   return (
     <div>
       <Navbar bg="light" expand="lg">

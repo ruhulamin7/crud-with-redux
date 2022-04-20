@@ -1,17 +1,16 @@
-import * as Types from "../types/Types";
+import * as Types from "../../types/types";
 
 const initialState = {
-  counter: 10,
-  tasks: [],
+  counter: 0,
 };
 
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_STATE":
+    case Types.GET_STATE:
       return {
         ...state,
       };
-    case "INCREMENT":
+    case Types.INCREMENT:
       let actionValue =
         typeof action.payload === "undefined" ? 1 : action.payload;
       actionValue = parseInt(actionValue);
@@ -19,12 +18,12 @@ const counterReducer = (state = initialState, action) => {
         ...state,
         counter: state.counter + actionValue,
       };
-    case "DECREMENT":
+    case Types.DECREMENT:
       return {
         ...state,
         counter: (state.counter -= 1),
       };
-    case "UPDATE":
+    case Types.UPDATE:
       if (action.payload) {
         return {
           ...state,
@@ -33,20 +32,6 @@ const counterReducer = (state = initialState, action) => {
       }
       break;
 
-    case Types.GET_TASKS:
-      return {
-        ...state,
-        tasks: action.payload,
-      };
-    case "ADD_TASK":
-      return {
-        ...state,
-      };
-    // case "INC_SPECIFIC":
-    //   return {
-    //     ...state,
-    //     counter: state.counter + parseInt(action.payload),
-    //   };
     default:
       return state;
   }

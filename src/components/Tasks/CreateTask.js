@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { getTaskData, storeTaskData } from "../../services/taskServices";
+import { storeTaskData } from "../../services/taskServices";
+import {
+  getTaskDataAction,
+  storeTaskDataAction,
+} from "../redux/actions/taskAction";
 
 const CreateTask = () => {
   const [title, setTitle] = useState("");
@@ -30,21 +34,21 @@ const CreateTask = () => {
     };
 
     // call api and store to the database
-    const isAdded = await storeTaskData(newTask);
-    if (isAdded) {
-      setTitle("");
-      setDescription("");
-      setPriority("");
-    } else {
-      alert("Something went wrong");
-    }
+    await storeTaskData(newTask);
+    // if (isAdded) {
+    //   setTitle("");
+    //   setDescription("");
+    //   setPriority("");
+    // } else {
+    //   alert("Something went wrong");
+    // }
 
-    // dispatch({ type: "ADD_TASK", payload: newTask });
-    const data = await getTaskData();
+    dispatch(storeTaskDataAction(newTask));
+    // const data = await getTaskDataAction();
     // for last data show first
-    data.sort();
-    data.reverse();
-    dispatch({ type: "GET_TASKS", payload: data });
+    // data.sort();
+    // data.reverse();
+    // dispatch({ type: "GET_TASKS", payload: data });
 
     // setIsAdded(true);
   }

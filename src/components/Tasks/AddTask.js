@@ -3,16 +3,16 @@ import { Button, Container, Form } from "react-bootstrap";
 import { MdOutlineAddTask } from "react-icons/md";
 import { BiTaskX } from "react-icons/bi";
 import TaskList from "./TaskList";
-import { getTaskData, storeTaskData } from "../../services/taskServices";
 import Counter from "../Counter/Counter";
 import CreateTask from "./CreateTask";
 import { useDispatch, useSelector } from "react-redux";
+import { getTaskDataAction } from "../redux/actions/taskAction";
 
 const AddTask = () => {
   // const [tasks, setTasks] = useState([]);
 
   const [isCreateMode, setIsCreateMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
@@ -28,17 +28,15 @@ const AddTask = () => {
   // }, []);
 
   useEffect(() => {
-    initializeData();
+    dispatch(getTaskDataAction());
+    setIsLoading(false);
   }, []);
 
-  const initializeData = async () => {
-    const data = await getTaskData();
-    // for last data show first
-    data.sort();
-    data.reverse();
-    dispatch({ type: "GET_TASKS", payload: data });
-    setIsLoading(false);
-  };
+  // const initializeData = async () => {
+  //   const data = await getTaskDataAction();
+  //   // for last data show first
+  //   setIsLoading(false);
+  // };
 
   return (
     <div>

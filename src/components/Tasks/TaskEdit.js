@@ -1,31 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
+  getSingleTaskDataAction,
   handleChangeTextInputAction,
-  storeTaskDataAction,
+  updateTaskDataAction,
 } from "../redux/actions/taskAction";
 
-const CreateTask = () => {
+const TaskEdit = () => {
   const dispatch = useDispatch();
   const taskForm = useSelector((state) => state.taskReducer.taskForm);
-  console.log("useSelector", taskForm);
+  const { id } = useParams();
+
   // console.log(taskForm);
+  useEffect(() => {
+    dispatch(getSingleTaskDataAction(id));
+  }, []);
 
   const handleChangeText = (name, value) => {
     dispatch(handleChangeTextInputAction(name, value));
   };
 
-  async function handleAddTask(e) {
+  async function handleUpdateTask(e) {
     e.preventDefault();
+    console.log("from tast edit", taskForm, id);
     // call api and store to the database
-
-    dispatch(storeTaskDataAction(taskForm));
+    dispatch(updateTaskDataAction(taskForm, id));
   }
   return (
     <div>
-      <Form onSubmit={handleAddTask} className="add_task_form">
-        <h4 className="mb-3">Add New Task</h4>
+      <Form onSubmit={handleUpdateTask} className="add_task_form">
+        <h4 className="mb-3">Update Task</h4>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             onChange={(e) => handleChangeText("Title", e.target.value)}
@@ -66,4 +73,4 @@ const CreateTask = () => {
   );
 };
 
-export default CreateTask;
+export default TaskEdit;

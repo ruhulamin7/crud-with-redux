@@ -5,6 +5,7 @@ import AddTask from "./components/Tasks/AddTask";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import TaskDetail from "./pages/TaskDetail/TaskDetail";
+import TaskEditPage from "./pages/TaskEditPage/TaskEditPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/task-detail" element={<TaskDetail />} />
+        <Route path="/edit/:id" element={<TaskEditPage />} />
       </Routes>
     </BrowserRouter>
   );

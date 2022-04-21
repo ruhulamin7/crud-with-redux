@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import counterReducer from "../reducers/counter/counterReducer";
-import rootReucer from "../reducers/rootReducer";
+import rootReducer from "../reducers/rootReducer";
 const middlewares = [thunkMiddleware];
 const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = [middlewareEnhancer];
@@ -19,7 +19,7 @@ const composedEnhancers = composeWithDevTools(...enhancers);
 // export default store;
 
 export default function store(previousState) {
-  const store = createStore(rootReucer, previousState, composedEnhancers);
+  const store = createStore(rootReducer, previousState, composedEnhancers);
 
   return store;
 }

@@ -1,8 +1,12 @@
 import React, { Fragment } from "react";
 import { Button, Spinner, Table } from "react-bootstrap";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { deleteTaskDataAction } from "../redux/actions/taskAction";
 
 const TaskList = ({ tasks, isLoading }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <div className="my_task_area">
@@ -35,10 +39,17 @@ const TaskList = ({ tasks, isLoading }) => {
                   <td>{task.Description}</td>
                   <td>{task.Priority}</td>
                   <td className="action_btns">
-                    <Button title="Edit Task" className="btn-success ">
-                      <FaPencilAlt />
-                    </Button>
-                    <Button title="Delete Task" className="btn-danger">
+                    <Link to={`/edit/${task._id}`}>
+                      <Button title="Edit Task" className="btn-success ">
+                        <FaPencilAlt />
+                      </Button>
+                    </Link>
+
+                    <Button
+                      onClick={() => dispatch(deleteTaskDataAction(task._id))}
+                      title="Delete Task"
+                      className="btn-danger"
+                    >
                       <FaTrash />
                     </Button>
                   </td>
